@@ -1,0 +1,19 @@
+<form>
+  <mat-form-field  class="full-width">
+    <input matInput placeholder="Nome" formControlName="nome" required/>
+  </mat-form-field>
+
+  <mat-form-field  class="full-width">
+    <input matInput placeholder="Telefone" formControlName="telefone" mask="(00) 00000-0000" required />
+  </mat-form-field>
+
+  <mat-form-field >
+    <mat-label>Sexo</mat-label>
+    <mat-select formControlName="sexo" required>
+      <mat-option value="Feminino">Feminino</mat-option>
+      <mat-option value="Masculino" >Masculino</mat-option>
+      <mat-option value="Outro">Prefere não informar</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</form>
