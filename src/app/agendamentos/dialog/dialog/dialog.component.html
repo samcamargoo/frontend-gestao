@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Cadastrar Cliente</h1>
+<h1 mat-dialog-title>Novo Agendamento</h1>
 <div mat-dialog-content>
   <form [formGroup]="form">
     <p>
@@ -22,18 +22,55 @@
         </mat-autocomplete>
       </mat-form-field>
 
+      <mat-form-field class="full-width">
+        <mat-label>Funcionario</mat-label>
+        <mat-select
+          required
+          [(ngModel)]="funcionarioId"
+          [ngModelOptions]="{ standalone: true, updateOn: 'change'  }"
+          (ngModelChange)="atualizarFuncionarioId()"
+        >
+          <mat-option
+            *ngFor="let funcionario of funcionarios"
+            value="{{funcionario.id}}"
 
-      <mat-form-field appearance="outline">
-        <mat-label>Telefone</mat-label>
-        <input formControlName="telefone" matInput placeholder="Telefone"  mask="(00) 00000-0000">
+            >{{ funcionario.nome }}</mat-option
+          >
+        </mat-select>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Sexo</mat-label>
-        <mat-select formControlName="sexo">
-          <mat-option value="Feminino">Feminino</mat-option>
-          <mat-option value="Masculino">Masculino</mat-option>
+      <mat-form-field class="medium-width">
+        <mat-label>Serviço</mat-label>
+        <mat-select
+          required
+          [(ngModel)]="servicoId"
+          [ngModelOptions]="{ standalone: true, updateOn: 'change' }"
+          (ngModelChange)="atualizarValor($event)"
+        >
+          <mat-option
+
+            *ngFor="let servico of servicos"
+            value="{{ servico.id }}"
+            >{{ servico.nome }}</mat-option
+          >
         </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Valor" [(ngModel)]="servicoValor"
+        [ngModelOptions]="{ standalone: true}"
+
+        >
+      </mat-form-field>
+     
+      <br>
+      <mat-form-field>
+        <mat-label>Escolha uma data</mat-label>
+        <input matInput [matDatepicker]="picker"  formControlName="data"
+        (ngModelChange)="atualizarData($event)"
+        >
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
     </p>
   </form>

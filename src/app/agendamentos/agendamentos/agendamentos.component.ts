@@ -1,3 +1,4 @@
+import { DialogComponent } from './../dialog/dialog/dialog.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
@@ -6,7 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Page } from 'src/app/models/Page';
-import { DialogComponent } from '../dialog/dialog/dialog.component';
+
 
 
 import { MessagesComponent } from './../../messages/messages/messages.component';
