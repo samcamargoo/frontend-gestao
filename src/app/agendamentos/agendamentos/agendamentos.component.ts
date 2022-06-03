@@ -1,17 +1,16 @@
-import { DialogComponent } from './../../clientes/dialog/dialog.component';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MessagesComponent } from './../../messages/messages/messages.component';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { Page } from 'src/app/models/Page';
 import { MatTableDataSource } from '@angular/material/table';
-import { AgendamentoViewModel } from './../../models/AgendamentoViewModel';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+import { Page } from 'src/app/models/Page';
+import { DialogComponent } from '../dialog/dialog/dialog.component';
+
+
+import { MessagesComponent } from './../../messages/messages/messages.component';
 import { AgendamentosService } from './../services/agendamentos.service';
-import { Agendamento } from './../model/agendamento';
-import { Observable, catchError, of } from 'rxjs';
-import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-agendamentos',

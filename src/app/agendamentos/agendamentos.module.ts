@@ -9,11 +9,13 @@ import { AgendamentosRoutingModule } from './agendamentos-routing.module';
 import { AgendamentosComponent } from './agendamentos/agendamentos.component';
 import { AgendamentosFormComponent } from './agendamentos-form/agendamentos-form.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { DialogComponent } from './dialog/dialog/dialog.component';
 
 @NgModule({
   declarations: [
     AgendamentosComponent,
-    AgendamentosFormComponent
+    AgendamentosFormComponent,
+    DialogComponent
   ],
   imports: [
     CommonModule,

@@ -1,9 +1,22 @@
 import { AgendamentoViewModel } from './../../models/AgendamentoViewModel';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import * as moment from 'moment';
-import { debounceTime, distinctUntilChanged, filter, map, Observable, startWith, switchMap } from 'rxjs';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  map,
+  Observable,
+  startWith,
+  switchMap,
+} from 'rxjs';
 
 import { Cliente } from './../../clientes/model/cliente';
 import { ClientesService } from './../../clientes/services/clientes.service';
@@ -44,7 +57,7 @@ export class AgendamentosFormComponent implements OnInit {
     private snackBar: MatSnackBar,
     private location: Location
   ) {
-    console.log(this.funcionarios1)
+    console.log(this.funcionarios1);
     this.form = this.formBuilder.group({
       cliente: this.formBuilder.group({
         nome: this.myControl,
@@ -56,7 +69,7 @@ export class AgendamentosFormComponent implements OnInit {
       servico: this.formBuilder.group({
         id: this.servicoId,
       }),
-      data: [this.dataHorario, Validators.required]
+      data: [this.dataHorario, Validators.required],
     });
 
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -67,26 +80,19 @@ export class AgendamentosFormComponent implements OnInit {
       distinctUntilChanged(),
       switchMap((value) => this.filter(value))
     );
-
-
-
-
   }
 
   ngOnInit() {
     //salva lista de funcionarios em um array[]
-    this.funcionarioService
-      .getFuncionariosList()
-      .subscribe((data) => {
-        for (let dados of data) {
+    this.funcionarioService.getFuncionariosList().subscribe((data) => {
+      for (let dados of data) {
+        this.funcionarios.push({ id: dados.id, nome: dados.nome });
+      }
+      console.log(this.funcionarios1);
+    });
 
-          this.funcionarios.push({id: dados.id, nome: dados.nome});
-        }
-        console.log(this.funcionarios1)
-      });
-
-      //salva lista de serviços em um array[]
-    this.ServicoService.listarServicos().subscribe((data) => {
+    //salva lista de serviços em um array[]
+    this.ServicoService.getServicosList().subscribe((data) => {
       for (let dados of data) {
         this.servicos.push({
           id: dados.id,
@@ -119,8 +125,8 @@ export class AgendamentosFormComponent implements OnInit {
   }
   atualizarData(data: string) {
     this.converterData(data);
-    console.log(this.form.get('data'))
-}
+    console.log(this.form.get('data'));
+  }
   atualizarFuncionarioId() {
     this.funcionarioId = this.funcionarioId;
   }
@@ -137,12 +143,13 @@ export class AgendamentosFormComponent implements OnInit {
       }
     }
 
-
     this.atribuirValoresAoForm();
-    this.agendamentoService.salvarAgendamento(new AgendamentoViewModel(this.form.value)).subscribe(
-      (result) => this.onSuccess(),
-      (error) => this.onError()
-    );
+    this.agendamentoService
+      .salvarAgendamento(new AgendamentoViewModel(this.form.value))
+      .subscribe(
+        (result) => this.onSuccess(),
+        (error) => this.onError()
+      );
     this.onCancel();
   }
 
@@ -151,10 +158,14 @@ export class AgendamentosFormComponent implements OnInit {
   }
 
   onSuccess() {
-    this.snackBar.open('Agendamento criado com sucesso', 'Fechar', {duration: 2000})
+    this.snackBar.open('Agendamento criado com sucesso', 'Fechar', {
+      duration: 2000,
+    });
   }
   onError() {
-    this.snackBar.open('Erro ao salvar agendamento', 'Fechar', {duration: 2000})
+    this.snackBar.open('Erro ao salvar agendamento', 'Fechar', {
+      duration: 2000,
+    });
   }
   filter(value: string) {
     return this.clienteService

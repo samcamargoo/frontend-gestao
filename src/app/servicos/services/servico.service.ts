@@ -11,7 +11,7 @@ export class ServicoService {
   private readonly API = 'https://gestao-api-app.herokuapp.com/api/v1/servicos';
   constructor(private httpClient: HttpClient) {}
 
-  listarServicos() {
+  getServicosList() {
     return this.httpClient.get<Servico[]>(this.API).pipe(
       first(),
       tap((servicos) => console.log(servicos))
