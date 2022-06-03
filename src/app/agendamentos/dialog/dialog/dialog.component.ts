@@ -81,7 +81,12 @@ export class DialogComponent implements OnInit {
     });
 
     this.clienteService.getClientsList().subscribe((data) => {
-      this.clientes.push(data);
+      for (let dados of data) {
+        this.clientes.push({
+          id: dados.id,
+          nome: dados.nome,
+        });
+      }
     });
 
     this.form = this.formBuilder.group({
