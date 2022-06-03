@@ -1,3 +1,4 @@
+import { Page } from 'src/app/models/Page';
 import { AgendamentoViewModel } from './../../models/AgendamentoViewModel';
 import { first, tap } from 'rxjs';
 import { Agendamento } from './../model/agendamento';
@@ -15,12 +16,16 @@ export class AgendamentosService {
     return this.API;
   }
 
-  listarAgendamentos() {
-    return this.httpClient.get<AgendamentoViewModel[]>(this.API).pipe(
-      first(),
-      tap((agendamentos) => console.log(agendamentos))
-    );
+  getAgendamentosPage(page: number, size: number) {
+    return this.httpClient.get<Page>(this.API + `/?page=${page}&size=${size}`);
   }
+
+  // listarAgendamentos() {
+  //   return this.httpClient.get<AgendamentoViewModel[]>(this.API).pipe(
+  //     first(),
+  //     tap((agendamentos) => console.log(agendamentos))
+  //   );
+  // }
 
   salvarAgendamento(record: AgendamentoViewModel) {
     return this.httpClient.post<AgendamentoViewModel[]>(this.API, record).pipe(first());

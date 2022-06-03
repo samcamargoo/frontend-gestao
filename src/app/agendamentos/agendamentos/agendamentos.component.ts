@@ -1,9 +1,15 @@
+import { MessagesComponent } from './../../messages/messages/messages.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+import { Page } from 'src/app/models/Page';
+import { MatTableDataSource } from '@angular/material/table';
 import { AgendamentoViewModel } from './../../models/AgendamentoViewModel';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AgendamentosService } from './../services/agendamentos.service';
 import { Agendamento } from './../model/agendamento';
 import { Observable, catchError, of } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-agendamentos',
@@ -11,7 +17,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./agendamentos.component.scss'],
 })
 export class AgendamentosComponent implements OnInit {
-  agendamentos$: Observable<AgendamentoViewModel[]>;
+  dataSource!: MatTableDataSource<any>;
+  page!: Page;
+  pageIndex: number = 0;
+  pageSize: number = 10;
+  totalElements: number = 0;
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   displayedColumns = [
     'funcionario',
     'cliente',
@@ -22,23 +35,36 @@ export class AgendamentosComponent implements OnInit {
     'actions',
   ];
   constructor(
-    private agendamentoService: AgendamentosService,
+    private service: AgendamentosService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar,
+    private messages: MessagesComponent,
   ) {
 
-    this.agendamentos$ = this.agendamentoService.listarAgendamentos().pipe(
-      catchError((error) => {
-        console.log('Erro ao buscar Clientes', 'Fechar');
-        return of([]);
-      })
+   
+  }
+
+  getAgendamentosPage(page: number, size: number) {
+    this.service.getAgendamentosPage(page, size).subscribe(
+      (result) => {
+        this.page = result;
+        this.totalElements = result.totalElements
+        this.dataSource = new MatTableDataSource(result.content);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      },
+      (error) => this.onError()
     );
   }
 
-  onAdd() {
-    this.router.navigate(['new'], { relativeTo: this.route });
-  }
+ 
 
+  onError() {
+    this.snackBar.open(this.messages.getClientsError, 'Fechar', {
+      duration: 2000,
+    });
+  }
   onEdit(id: number) {
     
     this.router.navigate(['editar', id])
