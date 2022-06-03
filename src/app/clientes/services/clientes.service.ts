@@ -9,7 +9,7 @@ import { Page } from 'src/app/models/Page';
   providedIn: 'root',
 })
 export class ClientesService {
-  private readonly API = 'http://gestao-api-app.herokuapp.com/api/v1/clientes';
+  private readonly API = 'https://gestao-api-app.herokuapp.com/api/v1/clientes';
 
   constructor(private httpClient: HttpClient) {}
 
