@@ -1,3 +1,5 @@
+import { DialogComponent } from './../../clientes/dialog/dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 import { MessagesComponent } from './../../messages/messages/messages.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
@@ -37,9 +39,9 @@ export class AgendamentosComponent implements OnInit {
   constructor(
     private service: AgendamentosService,
     private router: Router,
-    private route: ActivatedRoute,
     private snackBar: MatSnackBar,
     private messages: MessagesComponent,
+    private dialog: MatDialog
   ) {
 
    
@@ -58,16 +60,18 @@ export class AgendamentosComponent implements OnInit {
     );
   }
 
- 
+ openDialog() {
+  this.dialog.open(DialogComponent, {
+
+    width: '30%'
+  }) 
+ }
 
   onError() {
     this.snackBar.open(this.messages.getClientsError, 'Fechar', {
       duration: 2000,
     });
   }
-  onEdit(id: number) {
-    
-    this.router.navigate(['editar', id])
-  }
+ 
   ngOnInit(): void {}
 }
