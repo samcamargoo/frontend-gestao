@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MessagesComponent } from './../../messages/messages/messages.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Page } from 'src/app/models/Page';
 import { MatTableDataSource } from '@angular/material/table';
 import { AgendamentoViewModel } from './../../models/AgendamentoViewModel';
@@ -64,14 +64,41 @@ export class AgendamentosComponent implements OnInit {
   this.dialog.open(DialogComponent, {
 
     width: '30%'
-  }) 
+  }).afterClosed()
+  .subscribe((value) => {
+    if (value === 'saved') {
+      this.getAgendamentosPage(0, 10)
+    }
+  });
  }
+ setPage(event: PageEvent) {
+  let pageIndex = event.pageIndex;
+  let pageSize = event.pageSize;
+  console.log(this.pageIndex)
+  this.service
+    .getAgendamentosPage(pageIndex, pageSize)
+    .subscribe((result) => {
+      this.dataSource = new MatTableDataSource(result.content);
+    });
+}
+ applyFilter(event: Event) {
+  const filterValue = (event.target as HTMLInputElement).value;
+  this.dataSource.filter = filterValue.trim().toLowerCase();
 
+  if(this.dataSource.filter.length == 0 && this.dataSource.paginator) {
+    this.dataSource._updatePaginator(this.totalElements)
+  }
+  if (this.dataSource.paginator) {
+    this.dataSource.paginator.pageIndex = 0;
+  }
+}
   onError() {
     this.snackBar.open(this.messages.getClientsError, 'Fechar', {
       duration: 2000,
     });
   }
  
-  ngOnInit(): void {}
+  ngOnInit(){
+    this.getAgendamentosPage(0, 10)
+  }
 }
