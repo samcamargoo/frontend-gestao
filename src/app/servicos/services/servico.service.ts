@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ServicoService {
-  private readonly API = 'http://gestao-api-app.herokuapp.com/api/v1/servicos';
+  private readonly API = 'https://gestao-api-app.herokuapp.com/api/v1/servicos';
   constructor(private httpClient: HttpClient) {}
 
   listarServicos() {

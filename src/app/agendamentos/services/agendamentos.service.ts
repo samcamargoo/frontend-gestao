@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class AgendamentosService {
-  private readonly API = 'http://gestao-api-app.herokuapp.com/api/v1/agendamentos';
+  private readonly API = 'https://gestao-api-app.herokuapp.com/api/v1/agendamentos';
   constructor(private httpClient: HttpClient) {}
 
   getAgendamentosUrl() {

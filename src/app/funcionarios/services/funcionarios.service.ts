@@ -8,7 +8,7 @@ import { Funcionario } from '../model/funcionario';
   providedIn: 'root',
 })
 export class FuncionariosService {
-  private readonly API = 'http://gestao-api-app.herokuapp.com/v1/funcionarios';
+  private readonly API = 'https://gestao-api-app.herokuapp.com/v1/funcionarios';
 
   constructor(private httpClient: HttpClient) {}
 
