@@ -1,4 +1,5 @@
-import { map } from 'rxjs';
+import { Cliente } from './../../../clientes/model/cliente';
+import { debounceTime, distinctUntilChanged, filter, map, Observable, startWith, switchMap } from 'rxjs';
 import { ServicoService } from './../../../servicos/services/servico.service';
 import * as moment from 'moment';
 import { ClientesService } from './../../../clientes/services/clientes.service';
@@ -31,6 +32,7 @@ export class DialogComponent implements OnInit {
   funcionariosSelecionado = new FuncionarioViewModel({});
   servicos: any = [];
   clientes: any = [];
+  filteredOptions: Observable<Cliente[]>;
 
   constructor( private formBuilder: FormBuilder,
     private service: AgendamentosService,
@@ -41,7 +43,17 @@ export class DialogComponent implements OnInit {
     private clienteService: ClientesService,
     private servicoService: ServicoService,
     @Inject(MAT_DIALOG_DATA) public editData: any,
-    private messages: MessagesComponent) { }
+    private messages: MessagesComponent) { 
+
+      this.filteredOptions = this.myControl.valueChanges.pipe(
+        startWith(''),
+        map((value) => value.trim()),
+        debounceTime(200),
+        filter((value) => value.length > 3),
+        distinctUntilChanged(),
+        switchMap((value) => this.filter(value))
+      );
+    }
 
   ngOnInit(){
 
