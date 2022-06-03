@@ -18,7 +18,7 @@ export class ServicosComponent implements OnInit {
     private snackBar: MatSnackBar,
     private router: Router,
     private route: ActivatedRoute) {
-    this.servicos$ = this.servicoService.listarServicos().pipe(
+    this.servicos$ = this.servicoService.getServicosList().pipe(
       catchError((error) => {
         this.onError();
         return of([]);
