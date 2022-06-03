@@ -18,7 +18,7 @@ export class ClientesService {
    }
 
   getClientsList() {
-    return this.httpClient.get<Cliente[]>(this.API).pipe(first(), tap());
+    return this.httpClient.get<Cliente[]>(this.API + "/list").pipe(first(), tap());
   }
 
   // getClientsPage(page: number, size: number) {
