@@ -57,17 +57,10 @@ export class DialogComponent implements OnInit {
 
   ngOnInit(){
 
-    this.funcionarioService
-    .getFuncionariosList()
-    .subscribe((data) => {
-      
-      data.forEach(dados => {
-        this.funcionarios.push({
-          id: dados.id,
-          nome: dados.nome
-        });
-      }) 
-      
+    this.funcionarioService.getFuncionariosList().subscribe((data) => {
+      for (let dados of data) {
+        this.funcionarios.push({ id: dados.id, nome: dados.nome });
+      }
     });
 
     this.servicoService.getServicosList().subscribe((data) => {
