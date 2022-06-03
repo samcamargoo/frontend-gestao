@@ -1,0 +1,39 @@
+<h1 mat-dialog-title>{{titulo}}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form">
+  <p>
+  <mat-form-field appearance="outline" required>
+    <mat-label>Nome</mat-label>
+    <input placeholder="Nome" matInput formControlName="nome">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" required>
+    <mat-label>Endereço</mat-label>
+    <input placeholder="Endereço" matInput formControlName="endereco">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" required>
+    <mat-label>Telefone</mat-label>
+    <input placeholder="Telefone" matInput formControlName="telefone" mask="(00)00000-0000">
+  </mat-form-field>
+
+
+  <mat-form-field appearance="outline" required>
+    <mat-label>CPF</mat-label>
+    <input placeholder="CPF" matInput formControlName="cpf" mask="000.000.000-00" (ngModelChange)="verificarCpf($event)">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" required>
+    <mat-label>Sexo</mat-label>
+    <mat-select formControlName="sexo" formControlName="sexo">
+      <mat-option value="Feminino">Feminino</mat-option>
+      <mat-option value="Masculino">Masculino</mat-option>
+    </mat-select>
+  </mat-form-field>
+</p>
+</form>
+</div>
+<div mat-dialog-action [align]="'end'">
+  <button  mat-raised-button color="primary" [disabled]="!form.valid" (click)="addFuncionario()">{{actionBtn}}</button>
+  <button style="margin-left: 8px;" mat-raised-button color="warn" mat-dialog-close>Cancelar</button>
+</div >

@@ -1,12 +1,21 @@
-import { ClientesFormComponent } from './clientes/clientes-form/clientes-form.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FuncionariosComponent } from './funcionarios/funcionarios/funcionarios.component';
+
+
+import { HomeComponent } from './home/home.component';
+
 
 const routes: Routes = [
-  {path: '', pathMatch: 'full',  redirectTo: 'home'},
-  {path: 'new', component: ClientesFormComponent},
-  {path: 'funcionarios', component: FuncionariosComponent},
+  {path: '', component: HomeComponent},
+  {path: 'funcionarios',
+  loadChildren: () => import('./funcionarios/funcionarios.module').then(m => m.FuncionariosModule)
+  },
+  {path: 'agendamentos',
+    loadChildren: () => import('./agendamentos/agendamentos.module').then(m => m.AgendamentosModule)
+  },
+  {path: 'servicos',
+    loadChildren: () => import('./servicos/servicos.module').then(m => m.ServicosModule)
+  },
   {path: 'clientes',
   loadChildren: () => import('./clientes/clientes.module').then(m => m.ClientesModule)
 }

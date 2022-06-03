@@ -1,0 +1,8 @@
+{
+  "endpoints": {
+    "clientes": "http://localhost:8080/api/v1/clientes",
+    "funcionarios": "http://localhost:8080/api/v1/funcionarios",
+    "agendamentos": "http://localhost:8080/api/v1/agendamentos"
+  }
+
+}

@@ -1,3 +1,4 @@
+import { MessagesComponent } from './../messages/messages/messages.component';
 import { AppMaterialModule } from './app-material/app-material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -13,7 +14,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
   imports: [
     AppMaterialModule,
     CommonModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+
   ],
   exports: [ErrorComponent]
 })

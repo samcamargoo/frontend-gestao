@@ -1,21 +1,19 @@
-import { NgxMaskModule } from 'ngx-mask';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { NgxMaskModule } from 'ngx-mask';
 
 import { AppMaterialModule } from './../shared/app-material/app-material.module';
 import { SharedModule } from './../shared/shared.module';
-import { ClientesFormComponent } from './clientes-form/clientes-form.component';
 import { ClientesRoutingModule } from './clientes-routing.module';
 import { ClientesComponent } from './clientes/clientes.component';
-import { ClientsFormDialogComponent } from './clientes-form/clients-form-dialog/clients-form-dialog.component';
-
+import { DialogComponent } from './dialog/dialog.component';
 
 @NgModule({
   declarations: [
     ClientesComponent,
-    ClientesFormComponent,
-    ClientsFormDialogComponent
+    DialogComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +21,10 @@ import { ClientsFormDialogComponent } from './clientes-form/clients-form-dialog/
     AppMaterialModule,
     SharedModule,
     ReactiveFormsModule,
-    NgxMaskModule.forChild()
+    NgxMaskModule.forChild(),
+    MatDialogModule
+
   ]
+
 })
 export class ClientesModule { }

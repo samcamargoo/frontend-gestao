@@ -1,0 +1,99 @@
+<mat-card>
+  <mat-toolbar color="primary">Novo Agendamento</mat-toolbar>
+  <mat-card-content>
+    <form [formGroup]="form">
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          placeholder="Cliente"
+          [formControl]="myControl"
+          [matAutocomplete]="auto"
+          [(ngModel)]="cliente"
+        />
+        <mat-autocomplete  #auto="matAutocomplete">
+          <mat-option
+            *ngFor="let option of filteredOptions | async"
+            value="{{ option.nome }}"
+          >
+            {{ option.nome }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Funcionario</mat-label>
+        <mat-select
+          required
+          [(ngModel)]="funcionarioId"
+          [ngModelOptions]="{ standalone: true, updateOn: 'change'  }"
+          (ngModelChange)="atualizarFuncionarioId()"
+        >
+          <mat-option
+            *ngFor="let funcionario of funcionarios"
+            value="{{funcionario.id}}"
+
+            >{{ funcionario.nome }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="medium-width">
+        <mat-label>Serviço</mat-label>
+        <mat-select
+          required
+          [(ngModel)]="servicoId"
+          [ngModelOptions]="{ standalone: true, updateOn: 'change' }"
+          (ngModelChange)="atualizarValor($event)"
+        >
+          <mat-option
+
+            *ngFor="let servico of servicos"
+            value="{{ servico.id }}"
+            >{{ servico.nome }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Valor" [(ngModel)]="servicoValor"
+        [ngModelOptions]="{ standalone: true}"
+
+        >
+      </mat-form-field>
+      <!-- <mat-form-field>
+        <mat-label>Valor</mat-label>
+        <mat-select
+          required
+          [(ngModel)]="servicoValor"
+          [ngModelOptions]="{ standalone: true }"
+        >
+          <mat-option
+            *ngFor="let servico of servicos"
+            value="{{ servico.valor }}"
+            >{{ servico.valor }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field> -->
+      <br>
+      <mat-form-field>
+        <mat-label>Escolha uma data</mat-label>
+        <input matInput [matDatepicker]="picker"  formControlName="data"
+        (ngModelChange)="atualizarData($event)"
+        >
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="onSubmit()"
+      [disabled]="!form.valid"
+    >
+      Cadastrar
+    </button>
+    <button mat-raised-button (click)="onCancel()">Cancelar</button>
+  </mat-card-actions>
+</mat-card>
