@@ -60,10 +60,13 @@ export class DialogComponent implements OnInit {
     this.funcionarioService
     .getFuncionariosList()
     .subscribe((data) => {
-      for (let dados of data) {
-
-        this.funcionarios.push({id: dados.id, nome: dados.nome});
-      }
+      
+      data.forEach(dados => {
+        this.funcionarios.push({
+          id: dados.id,
+          nome: dados.nome
+        });
+      }) 
       
     });
 
@@ -78,12 +81,11 @@ export class DialogComponent implements OnInit {
     });
 
     this.clienteService.getClientsList().subscribe((data) => {
-      for (let dados of data) {
-        this.clientes.push({
-          id: dados.id,
-          nome: dados.nome,
-        });
-      }
+      
+      data.forEach(dados => {
+        this.clientes.push({id: dados.id,
+        nome: dados.nome})
+      })
     });
 
     this.form = this.formBuilder.group({
