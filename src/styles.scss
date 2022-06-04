@@ -2,3 +2,20 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.full-with-dialog {
+
+  width: 30%;
+
+  @media only screen and (max-width: 568px) {
+   width: 100%;
+  }
+
+  @media only screen and (max-width: 468px) {
+    width: 100%;
+  }
+
+  @media only screen and (max-width: 368px) {
+    width: 100%;
+  }
+}

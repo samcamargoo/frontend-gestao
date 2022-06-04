@@ -39,7 +39,8 @@ export class ClientesComponent implements OnInit {
   openDialog() {
     this.dialog
       .open(DialogComponent, {
-        width: '30%',
+        
+        panelClass: 'full-with-dialog'
       })
       .afterClosed()
       .subscribe((value) => {
@@ -87,8 +88,10 @@ export class ClientesComponent implements OnInit {
   editClient(cliente: any) {
     this.dialog
       .open(DialogComponent, {
-        width: '30%',
+
         data: cliente,
+        panelClass: 'full-with-dialog'
+
       })
       .afterClosed()
       .subscribe((value) => {
