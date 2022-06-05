@@ -36,13 +36,13 @@ export class FuncionariosComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private dialog: MatDialog
   ) {
-    
+
   }
 
   editFuncionario(funcionario: any) {
     this.dialog
       .open(FuncionarioDialogComponent, {
-        width: '30%',
+        panelClass: 'full-with-dialog',
         data: funcionario,
       })
       .afterClosed()
@@ -59,7 +59,7 @@ export class FuncionariosComponent implements OnInit {
   openDialog() {
     this.dialog
       .open(FuncionarioDialogComponent, {
-        width: '30%',
+        panelClass: 'full-with-dialog'
       })
       .afterClosed()
       .subscribe((value) => {
@@ -102,7 +102,7 @@ export class FuncionariosComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-    
+
     if(this.dataSource.filter.length == 0 && this.dataSource.paginator) {
       this.dataSource._updatePaginator(this.totalElements)
     }

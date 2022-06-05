@@ -62,8 +62,7 @@ export class AgendamentosComponent implements OnInit {
 
  openDialog() {
   this.dialog.open(DialogComponent, {
-
-    width: '30%'
+    panelClass: 'full-with-dialog'
   }).afterClosed()
   .subscribe((value) => {
     if (value === 'saved') {
