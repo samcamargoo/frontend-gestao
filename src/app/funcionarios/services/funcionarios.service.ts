@@ -35,6 +35,10 @@ export class FuncionariosService {
   putFuncionario(record: any, id: number) {
     return this.httpClient.put<any>(this.API + '/' + id, record);
   }
+
+  deleteFuncionario(id: number) {
+    return this.httpClient.delete<any>(this.API + '/' + id);
+  }
   verificarCpf(cpf: string) {
     return this.httpClient.post<any>(this.API + '/verificar-cpf/' +cpf, cpf);
   }

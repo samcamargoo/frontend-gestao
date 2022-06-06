@@ -12,12 +12,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class DialogComponent implements OnInit {
   form!: FormGroup;
   actionBtn: string = 'Cadastrar';
+  titulo: string = 'Cadastro de Cliente';
 
-  // msgAddClientSuccess: string = 'Cliente cadastrado com sucesso';
-  // msgAddClientError: string = 'Erro ao cadastraro cliente';
-
-  // msgEditClientSuccess: string = 'Cliente editado com sucesso';
-  // msgEditClientError: string = 'Erro ao editar cliente';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,6 +35,7 @@ export class DialogComponent implements OnInit {
 
     if (this.editData) {
       this.actionBtn = 'Editar';
+      this.titulo = 'Editar Cliente';
       this.form.patchValue(this.editData);
     }
   }

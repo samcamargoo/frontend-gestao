@@ -39,7 +39,7 @@ export class ClientesComponent implements OnInit {
   openDialog() {
     this.dialog
       .open(DialogComponent, {
-        
+
         panelClass: 'full-with-dialog'
       })
       .afterClosed()
@@ -96,7 +96,7 @@ export class ClientesComponent implements OnInit {
       .afterClosed()
       .subscribe((value) => {
         if (value === 'updated') {
-          // this.getAllClients();
+          this.getClientsPage(0, 10);
         }
       });
   }

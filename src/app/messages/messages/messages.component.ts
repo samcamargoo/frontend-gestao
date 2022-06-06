@@ -23,7 +23,9 @@ export class MessagesComponent implements OnInit {
   postFuncionarioSuccess: string = 'Funcionário cadastrado com sucesso';
   putFuncionarioSuccess: string = 'Funcionário atualizado com sucesso';
   deleteFuncionarioSuccess: string = 'Funcionário deletado com sucesso';
-  
+
+
+  cpfAlreadyInUse: string = 'Cpf cadastrado para outro funcionário';
   constructor() { }
 
   ngOnInit(): void {

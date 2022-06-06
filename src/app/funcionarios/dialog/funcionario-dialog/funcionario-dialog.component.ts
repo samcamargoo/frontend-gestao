@@ -1,11 +1,18 @@
-import { map } from 'rxjs/operators';
-import { MessagesComponent } from './../../../messages/messages/messages.component';
+import { Component, Inject, OnInit } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { debounceTime, distinctUntilChanged, filter, startWith } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+import { MessagesComponent } from './../../../messages/messages/messages.component';
 import { FuncionariosService } from './../../services/funcionarios.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Observable, distinctUntilChanged, of, filter } from 'rxjs';
+
 @Component({
   selector: 'app-funcionario-dialog',
   templateUrl: './funcionario-dialog.component.html',
@@ -15,6 +22,8 @@ export class FuncionarioDialogComponent implements OnInit {
   form!: FormGroup;
   titulo: string = 'Cadastro de Funcionário';
   actionBtn: string = 'Cadastrar';
+  cpf: string = '';
+
   constructor(
     private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public editData: any,
@@ -36,7 +45,9 @@ export class FuncionarioDialogComponent implements OnInit {
     if (this.editData) {
       this.actionBtn = 'Editar';
       this.titulo = 'Editar Funcionário';
+      this.form.get('cpf')?.disable();
       this.form.patchValue(this.editData);
+
     }
   }
 
@@ -55,21 +66,30 @@ export class FuncionarioDialogComponent implements OnInit {
   }
 
   editFuncionario() {
+
     this.service.putFuncionario(this.form.value, this.editData.id).subscribe(
       (result) => {
         this.onSuccess(this.message.putFuncionarioSuccess, 'Fechar');
         this.form.reset();
         this.dialog.close('updated');
+
       },
       (error) => this.onError(this.message.putFuncionarioError, 'Fechar')
     );
   }
 
   verificarCpf(cpf: string) {
-    if(cpf.length == 14)
-    this.service.verificarCpf(cpf).pipe(map(value => value.trim()),
-    filter(value => value.length == 14),
-    distinctUntilChanged()).subscribe()
+    if (cpf.length == 14) {
+      this.service.verificarCpf(cpf).subscribe(
+        (result) => console.log(result),
+        (error) => {
+          if (error.error) {
+            this.onError(this.message.cpfAlreadyInUse, 'Fechar');
+            //this.form.get('cpf')?.reset();
+          }
+        }
+      );
+    }
   }
 
   onError(msg: string, fechar: string) {

@@ -1,3 +1,4 @@
+import { MessagesComponent } from './../../messages/messages/messages.component';
 import { FuncionarioViewModel } from './../../models/FuncionarioViewModel';
 import { ClienteViewModel } from './../../models/ClienteViewModel';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -34,7 +35,8 @@ export class FuncionariosComponent implements OnInit {
   constructor(
     private service: FuncionariosService,
     private _snackBar: MatSnackBar,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private messages: MessagesComponent
   ) {
 
   }
@@ -48,9 +50,13 @@ export class FuncionariosComponent implements OnInit {
       .afterClosed()
       .subscribe((value) => {
         if (value === 'updated') {
-          // this.getAllFuncionarios();
+          this.getFuncionariosPage(0,10);
         }
       });
+  }
+
+  deleteFuncionario(id: number) {
+    this.service.deleteFuncionario(id).subscribe(result => this._snackBar.open(this.messages.deleteFuncionarioSuccess, 'Fechar'), error => this._snackBar.open(this.messages.deleteFuncionarioError, 'Fechar'))
   }
   onError(message: string, action: string) {
     this._snackBar.open(message, action);
