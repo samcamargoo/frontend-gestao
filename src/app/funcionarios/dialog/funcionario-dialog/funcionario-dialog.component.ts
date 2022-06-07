@@ -48,6 +48,8 @@ export class FuncionarioDialogComponent implements OnInit {
       this.form.get('cpf')?.disable();
       this.form.getRawValue();
       this.form.patchValue(this.editData);
+      console.log(this.form.get('cpf').value);
+      console.log(this.form.getRawValue());
       
 
     }
