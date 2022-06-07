@@ -50,7 +50,7 @@ export class FuncionarioDialogComponent implements OnInit {
       this.form.patchValue(this.editData);
       console.log(this.form.get('cpf')?.value);
       console.log(this.form.getRawValue());
-      
+
 
     }
   }
@@ -82,18 +82,22 @@ export class FuncionarioDialogComponent implements OnInit {
     );
   }
 
-  verificarCpf(cpf: string) {
-    if (cpf.length == 14) {
+  verificarCpf(cpf: any) {
+    if(cpf.length < 14) {
+      return;
+    }
+
       this.service.verificarCpf(cpf).subscribe(
         (result) => console.log(result),
         (error) => {
           if (error.error) {
             this.onError(this.message.cpfAlreadyInUse, 'Fechar');
-            //this.form.get('cpf')?.reset();
+            this.form.get('cpf')?.reset();
+            
           }
         }
       );
-    }
+
   }
 
   onError(msg: string, fechar: string) {

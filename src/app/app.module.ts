@@ -17,6 +17,8 @@ import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { MatSortModule } from '@angular/material/sort';
 import { MessagesComponent } from './messages/messages/messages.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './components/header/header.component';
 
 
 
@@ -26,7 +28,9 @@ import { MessagesComponent } from './messages/messages/messages.component';
   declarations: [
     AppComponent,
     MenuComponent,
-    MessagesComponent
+    MessagesComponent,
+    FooterComponent,
+    HeaderComponent
   ],
 
 

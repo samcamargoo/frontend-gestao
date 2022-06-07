@@ -56,7 +56,11 @@ export class FuncionariosComponent implements OnInit {
   }
 
   deleteFuncionario(id: number) {
-    this.service.deleteFuncionario(id).subscribe(result => this._snackBar.open(this.messages.deleteFuncionarioSuccess, 'Fechar'), error => this._snackBar.open(this.messages.deleteFuncionarioError, 'Fechar'))
+
+    this.service.deleteFuncionario(id).subscribe(
+      (result) =>console.log(result),
+      (error) => console.log(error)
+          );
   }
   onError(message: string, action: string) {
     this._snackBar.open(message, action);
@@ -70,7 +74,7 @@ export class FuncionariosComponent implements OnInit {
       .afterClosed()
       .subscribe((value) => {
         if (value === 'saved') {
-          // this.getAllFuncionarios();
+          this.getFuncionariosPage(0, 10);
         }
       });
   }

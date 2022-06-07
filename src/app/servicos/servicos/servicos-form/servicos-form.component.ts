@@ -19,7 +19,7 @@ export class ServicosFormComponent implements OnInit {
   ) {
     this.form = this.formBuilder.group({
       nome: [null, Validators.required],
-      valor: [null, [Validators.required, Validators.pattern('^[0-9]*$')]],
+      valor: [null, [Validators.required, Validators.pattern('\\-?\\d*\\,?\\d{1,2}')]],
     });
   }
 

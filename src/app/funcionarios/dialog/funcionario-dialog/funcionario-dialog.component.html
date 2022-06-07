@@ -20,7 +20,7 @@
 
   <mat-form-field appearance="outline" required >
     <mat-label>CPF</mat-label>
-    <input placeholder="CPF"  matInput formControlName="cpf" mask="000.000.000-00" (ngModelChange)="verificarCpf($event)">
+    <input placeholder="CPF"  matInput formControlName="cpf" mask="000.000.000-00" (blur)="verificarCpf($any($event.target).value)">
   </mat-form-field>
 
   <mat-form-field appearance="outline" required>

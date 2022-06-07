@@ -1,3 +1,4 @@
+import { FuncionarioViewModel } from 'src/app/models/FuncionarioViewModel';
 import { Page } from 'src/app/models/Page';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -32,12 +33,12 @@ export class FuncionariosService {
     return this.httpClient.post<Funcionario>(this.API, record);
   }
 
-  putFuncionario(record: any, id: number) {
+  putFuncionario(id: number, record: any) {
     return this.httpClient.put<any>(this.API + '/' + id, record);
   }
 
   deleteFuncionario(id: number) {
-    return this.httpClient.delete<any>(this.API + '/' + id);
+    return this.httpClient.delete<FuncionarioViewModel>(this.API + '/' + id);
   }
   verificarCpf(cpf: string) {
     return this.httpClient.post<any>(this.API + '/verificar-cpf/' +cpf, cpf);
