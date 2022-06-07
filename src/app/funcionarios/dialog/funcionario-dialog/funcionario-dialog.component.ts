@@ -46,8 +46,8 @@ export class FuncionarioDialogComponent implements OnInit {
       this.actionBtn = 'Editar';
       this.titulo = 'Editar Funcionário';
       this.form.getRawValue();
-      this.form.get('cpf')?.disable();
       this.form.patchValue(this.editData);
+      this.form.get('cpf')?.disable();
 
     }
   }
