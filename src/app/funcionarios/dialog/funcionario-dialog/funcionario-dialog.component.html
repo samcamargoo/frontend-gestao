@@ -14,13 +14,13 @@
 
   <mat-form-field appearance="outline" required>
     <mat-label>Telefone</mat-label>
-    <input placeholder="Telefone" matInput formControlName="telefone" mask="(00)00000-0000">
+    <input placeholder="Telefone"  matInput formControlName="telefone" mask="(00)00000-0000">
   </mat-form-field>
 
 
   <mat-form-field appearance="outline" required >
     <mat-label>CPF</mat-label>
-    <input placeholder="CPF"  matInput formControlName="cpf" mask="000.000.000-00" (ngModelChange)="verificarCpf($event)">
+    <input placeholder="CPF" ng-disabled="editData" matInput formControlName="cpf" mask="000.000.000-00" (ngModelChange)="verificarCpf($event)">
   </mat-form-field>
 
   <mat-form-field appearance="outline" required>
