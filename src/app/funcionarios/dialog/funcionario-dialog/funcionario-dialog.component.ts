@@ -70,7 +70,7 @@ export class FuncionarioDialogComponent implements OnInit {
   }
 
   editFuncionario() {
-
+    this.form.get('cpf')?.enable();
     this.service.putFuncionario(this.form.value, this.editData.id).subscribe(
       (result) => {
         this.onSuccess(this.message.putFuncionarioSuccess, 'Fechar');
