@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>{{titulo}}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form">
+    <p>
+      <mat-form-field appearance="outline" required>
+        <mat-label>Nome</mat-label>
+        <input formControlName="nome" matInput placeholder="Nome">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" required>
+        <mat-label>Valor</mat-label>
+        <input formControlName="valor" matInput placeholder="Valor">
+      </mat-form-field>
+    </p>
+  </form>
+</div>
+<div mat-dialog-action [align]="'end'">
+  <button  mat-raised-button color="primary" [disabled]="!form.valid" (click)="addService()">{{actionBtn}}</button>
+  <button style="margin-left: 8px;" mat-raised-button color="warn" mat-dialog-close>Cancelar</button>
+</div >

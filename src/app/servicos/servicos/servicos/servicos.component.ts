@@ -1,3 +1,7 @@
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from './../../dialog/dialog.component';
+
+
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, catchError, of } from 'rxjs';
@@ -17,7 +21,9 @@ export class ServicosComponent implements OnInit {
   constructor(private servicoService: ServicoService,
     private snackBar: MatSnackBar,
     private router: Router,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private dialog: MatDialog
+    ) {
     this.servicos$ = this.servicoService.getServicosList().pipe(
       catchError((error) => {
         this.onError();
@@ -35,5 +41,11 @@ export class ServicosComponent implements OnInit {
   }
   onAdd() {
     this.router.navigate(['new'], {relativeTo: this.route})
+  }
+
+  openDialog() {
+    this.dialog.open(DialogComponent, {
+      panelClass: 'full-with-dialog'
+    })
   }
 }
