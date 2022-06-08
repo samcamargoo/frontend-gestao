@@ -26,7 +26,7 @@ export class ServicosFormComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit() {
-    this.servicoService.salvarServico(this.form.value).subscribe(
+    this.servicoService.postServico(this.form.value).subscribe(
       (result) => this.onSuccess(),
       (error) => this.onError()
     );

@@ -24,6 +24,10 @@ export class MessagesComponent implements OnInit {
   putFuncionarioSuccess: string = 'Funcionário atualizado com sucesso';
   deleteFuncionarioSuccess: string = 'Funcionário deletado com sucesso';
 
+  getServicoError: string = "Erro ao carregar serviços"
+  postServicoError: string = 'Erro ao cadastrar serviço';
+
+  postServicoSuccess: string = 'Serviço cadastrado com sucesso';
 
   cpfAlreadyInUse: string = 'Cpf cadastrado para outro funcionário';
   constructor() { }

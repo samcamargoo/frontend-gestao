@@ -1,3 +1,4 @@
+import { Page } from './../../models/Page';
 import { ServicoViewModel } from './../../models/ServicoViewModel';
 import { first, tap } from 'rxjs';
 import { Servico } from './../model/servico';
@@ -12,13 +13,17 @@ export class ServicoService {
   constructor(private httpClient: HttpClient) {}
 
   getServicosList() {
-    return this.httpClient.get<Servico[]>(this.API).pipe(
+    return this.httpClient.get<Servico[]>(this.API + '/list').pipe(
       first(),
       tap((servicos) => console.log(servicos))
     );
   }
 
-  salvarServico(record: ServicoViewModel) {
+  getServicosPage(page: number, size: number) {
+    return this.httpClient.get<Page>(this.API + `?page=${page}size=${size}`);
+  }
+
+  postServico(record: ServicoViewModel) {
     return this.httpClient.post<ServicoViewModel[]>(this.API, record);
 
   }
